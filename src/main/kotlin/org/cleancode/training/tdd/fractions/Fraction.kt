@@ -1,9 +1,10 @@
 package org.cleancode.training.tdd.fractions
 
-data class Fraction(val nomerator: Int, val denomerator: Int) {
+data class Fraction(val numerator: Int, val denominator: Int = 1) {
 
-    fun add(fraction: Fraction): Fraction {
-        return Fraction(0, 0)
+    fun add(other: Fraction): Fraction {
+        val numerator = this.numerator + other.numerator
+        return Fraction(numerator, 1)
     }
 
 }
