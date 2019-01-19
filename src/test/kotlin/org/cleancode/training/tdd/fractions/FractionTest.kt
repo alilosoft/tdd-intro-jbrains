@@ -4,16 +4,19 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class FractionTest {
-    @Test fun addFractions() {
+//    @Test fun addFractions() {
 //        assertEquals(Fraction(numerator = 47, denominator = 15),
 //                Fraction(7, 3).add(Fraction(4, 5)))
-    }
+//    }
 
-    @Test fun addWithDenominatorIsOne() {
+    @Test fun additionWhenDenominatorIsOne() {
         assertEquals(Fraction(7),
                 Fraction(3).add(Fraction(4)))
-
-        assertEquals(Fraction(9),
-                Fraction(5).add(Fraction(4)))
     }
+
+    @Test fun additionWhenDenominatorsAreEqual() {
+        assertEquals(Fraction(5, 7),
+                Fraction(3, 7).add(Fraction(2, 7)))
+    }
+
 }

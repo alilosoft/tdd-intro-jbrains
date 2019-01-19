@@ -4,7 +4,8 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
 
     fun add(other: Fraction): Fraction {
         val numerator = this.numerator + other.numerator
-        return Fraction(numerator, 1)
+        val denominator = this.denominator
+        return Fraction(numerator, denominator)
     }
 
 }
