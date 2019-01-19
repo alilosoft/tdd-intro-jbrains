@@ -1,4 +1,4 @@
-package tdd.intro.jbrains.fractions
+package org.cleancode.training.tdd.fractions
 
 data class Fraction(val nomerator: Int, val denomerator: Int) {
 

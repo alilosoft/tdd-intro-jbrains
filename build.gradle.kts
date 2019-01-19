@@ -4,6 +4,9 @@
  * This generated file contains a sample Kotlin application project to get you started.
  */
 
+group = "org.cleancode.training.tdd"
+version = "1.0-SNAPSHOT"
+
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
     id("org.jetbrains.kotlin.jvm").version("1.3.11")
@@ -32,5 +35,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = "tdd.intro.jbrains.AppKt"
+    mainClassName = ""
 }

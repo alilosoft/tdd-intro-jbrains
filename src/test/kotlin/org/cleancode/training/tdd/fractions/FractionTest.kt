@@ -1,4 +1,4 @@
-package tdd.intro.jbrains.fractions
+package org.cleancode.training.tdd.fractions
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
