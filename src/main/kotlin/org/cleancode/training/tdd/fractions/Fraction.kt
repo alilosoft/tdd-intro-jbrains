@@ -16,6 +16,12 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
             rNumerator = this.numerator * other.denominator + other.numerator * this.denominator
             rDenominator = this.denominator * other.denominator
         }
+        // calc lowest term
+        val gcd = calcGCD(rNumerator, rDenominator)
+        if (gcd > 1) {
+            rNumerator /= gcd
+            rDenominator /= gcd
+        }
         return Fraction(rNumerator, rDenominator)
     }
 
