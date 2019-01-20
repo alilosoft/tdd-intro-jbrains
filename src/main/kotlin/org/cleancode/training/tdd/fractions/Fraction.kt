@@ -20,7 +20,7 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
             rDenominator = this.denominator * other.denominator
         }
         // calc lowest term
-        val gcd = calcGCD(rNumerator, rDenominator)
+        val gcd = euclideanGCD(rNumerator, rDenominator)
         if (gcd > 1) {
             rNumerator /= gcd
             rDenominator /= gcd
@@ -28,6 +28,10 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
         return Fraction(rNumerator, rDenominator)
     }
 
+}
+
+fun euclideanGCD(a: Int, b: Int): Int {
+    return if (b == 0) a else euclideanGCD(b, a % b)
 }
 
 fun calcGCD(n1: Int, n2: Int): Int {
