@@ -1,10 +1,16 @@
 package org.cleancode.training.tdd.fractions
 
+import org.junit.Rule
 import kotlin.math.min
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class FractionTest {
+
+    @Test(expected = AssertionError::class)
+    fun denominatorMustNotEqualToZero() {
+        Fraction(0, 0)
+    }
 
     @Test
     fun additionWhenDenominatorIsOne() {

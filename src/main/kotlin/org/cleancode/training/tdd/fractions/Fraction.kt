@@ -3,10 +3,13 @@ package org.cleancode.training.tdd.fractions
 import kotlin.math.min
 
 data class Fraction(val numerator: Int, val denominator: Int = 1) {
+    init {
+        assert(denominator != 0) {"Denominator can't be Zero"}
+    }
 
     fun add(other: Fraction): Fraction {
-        var rNumerator = 0
-        var rDenominator = 0
+        var rNumerator: Int
+        var rDenominator: Int
 
         if (this.denominator == other.denominator) {
             rNumerator = this.numerator + other.numerator
