@@ -1,5 +1,7 @@
 package org.cleancode.training.tdd.fractions
 
+import kotlin.math.min
+
 data class Fraction(val numerator: Int, val denominator: Int = 1) {
 
     fun add(other: Fraction): Fraction {
@@ -17,4 +19,16 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
         return Fraction(rNumerator, rDenominator)
     }
 
+}
+
+fun calcGCD(n1: Int, n2: Int): Int {
+    var gcd = 1
+    val min = min(n1, n2)
+
+    for (g in 2..min) {
+        if (n1 % g == 0 && n2 % g == 0) {
+            gcd = g
+        }
+    }
+    return gcd
 }
