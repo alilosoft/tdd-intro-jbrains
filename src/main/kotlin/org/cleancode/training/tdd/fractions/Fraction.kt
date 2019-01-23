@@ -16,18 +16,14 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
         if (this.denominator == other.denominator) {
             rNumerator = this.numerator + other.numerator
             rDenominator = this.denominator
-            if (rDenominator < 0) {
-                rDenominator *= -1
-                rNumerator *= -1
-            }
         } else {
             // unify the denominator
             rNumerator = this.numerator * other.denominator + other.numerator * this.denominator
             rDenominator = this.denominator * other.denominator
-            if (rDenominator < 0) {
-                rDenominator *= -1
-                rNumerator *= -1
-            }
+        }
+        if (rDenominator < 0) {
+            rDenominator *= -1
+            rNumerator *= -1
         }
         return Fraction(rNumerator, rDenominator).lowestTerm()
     }
