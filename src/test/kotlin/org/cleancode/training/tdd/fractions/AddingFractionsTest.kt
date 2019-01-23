@@ -42,24 +42,41 @@ internal class AddingFractionsTest {
     }
 
     @Test
-    fun whenNumeratorIsNegativeWithSameDenominator() {
+    fun whenNumeratorIsNegativeAndDenominatorIsOne() {
         assertEquals(Fraction(0), Fraction(-1).add(Fraction(1)))
-        assertEquals(Fraction(1), Fraction(-1).add(Fraction(2)))
-        assertEquals(Fraction(1, 2), Fraction(-1, 2).add(Fraction(1)))
-        assertEquals(Fraction(1, 2), Fraction(-1, 2).add(Fraction(1, 2)))
-        assertEquals(Fraction(-5, 6),
-                Fraction(-7, 10).add(Fraction(-2, 15)))
+        assertEquals(Fraction(-2), Fraction(-1).add(Fraction(-1)))
     }
 
     @Test
-    fun whenDenominatorIsNegative() {
-        assertEquals(Fraction(-5, 6), Fraction(7, -10).add(Fraction(2, -15)))
+    fun whenNumeratorIsNegative() {
+        assertEquals(Fraction(0), (-1 over 2).add(1 over 2))
+        assertEquals(-5 over 6, (-7 over 10).add(-2 over 15))
+    }
+
+    @Test
+    fun whenDenominatorAreSameAndNegative() {
+        assertEquals(-7 over 5, (3 over -5).add(4 over -5))
+        assertEquals(7 over 5, (-3 over -5).add(-4 over -5))
+        assertEquals(-1 over 5, (-3 over -5).add(4 over -5))
+        assertEquals(1 over 5, (3 over -5).add(-4 over -5))
+    }
+
+    @Test
+    fun whenDenominatorHaveDifferentSigns() {
+        assertEquals(-1 over 5, (3 over 5).add(4 over -5))
+        assertEquals(-7 over 5, (-3 over 5).add(4 over -5))
+        assertEquals(1 over 5, (3 over -5).add(4 over 5))
+    }
+
+    @Test
+    fun whenDenominatorAreDifferentAndNegative() {
+        assertEquals(-5 over 6, (7 over -10).add(2 over -15))
     }
 
     @Test
     fun whenNumeratorAndDenominatorAreNegative() {
-        assertEquals(Fraction(7, 10), Fraction(-7, -10).add(Fraction(0)))
-        assertEquals(Fraction(6, 5), Fraction(-7, -10).add(Fraction(1, 2)))
+        assertEquals(7 over 10, (-7 over -10).add(Fraction(0)))
+        assertEquals(6 over 5, (-7 over -10).add(1 over 2))
     }
 
 }
