@@ -5,11 +5,6 @@ import kotlin.test.assertEquals
 
 internal class AddingFractionsTest {
 
-    @Test(expected = AssertionError::class)
-    fun denominatorMustNotEqualToZero() {
-        Fraction(0, 0)
-    }
-
     @Test
     fun whenDenominatorIsOne() {
         var expected = Fraction(0)
@@ -47,10 +42,11 @@ internal class AddingFractionsTest {
     }
 
     @Test
-    fun whenNumeratorIsNegative() {
+    fun whenNumeratorIsNegativeWithSameDenominator() {
         assertEquals(Fraction(0), Fraction(-1).add(Fraction(1)))
         assertEquals(Fraction(1), Fraction(-1).add(Fraction(2)))
         assertEquals(Fraction(1, 2), Fraction(-1, 2).add(Fraction(1)))
+        assertEquals(Fraction(1, 2), Fraction(-1, 2).add(Fraction(1, 2)))
         assertEquals(Fraction(-5, 6),
                 Fraction(-7, 10).add(Fraction(-2, 15)))
     }
