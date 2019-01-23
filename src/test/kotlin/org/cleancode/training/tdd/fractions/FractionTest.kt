@@ -40,7 +40,7 @@ internal class FractionTest {
     }
 
     @Test
-    fun additionAndConversionToLowerTerm() {
+    fun additionAndConversionToLowestTerm() {
         val expected = Fraction(numerator = 13, denominator = 18)
         val actual = Fraction(3, 6).add(Fraction(2, 9))
         assertEquals(expected, actual)

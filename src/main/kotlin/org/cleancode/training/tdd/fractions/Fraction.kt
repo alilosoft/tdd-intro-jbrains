@@ -4,7 +4,7 @@ import kotlin.math.min
 
 data class Fraction(val numerator: Int, val denominator: Int = 1) {
     init {
-        assert(denominator != 0) {"Denominator can't be Zero"}
+        assert(denominator != 0) { "Denominator can't be Zero" }
     }
 
     fun add(other: Fraction): Fraction {
@@ -19,13 +19,12 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
             rNumerator = this.numerator * other.denominator + other.numerator * this.denominator
             rDenominator = this.denominator * other.denominator
         }
-        // calc lowest term
-        val gcd = euclideanGCD(rNumerator, rDenominator)
-        if (gcd > 1) {
-            rNumerator /= gcd
-            rDenominator /= gcd
-        }
-        return Fraction(rNumerator, rDenominator)
+        return Fraction(rNumerator, rDenominator).lowestTerm()
+    }
+
+    private fun lowestTerm(): Fraction {
+        val gcd = euclideanGCD(numerator, denominator)
+        return Fraction(numerator / gcd, denominator / gcd)
     }
 
 }
