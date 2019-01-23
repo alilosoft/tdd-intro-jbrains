@@ -4,14 +4,18 @@ import kotlin.math.min
 
 infix fun Int.over(denominator: Int) = Fraction(this, denominator)
 
-data class Fraction(val numerator: Int, val denominator: Int = 1) {
+data class Fraction(var numerator: Int, var denominator: Int = 1) {
     init {
         assert(denominator != 0) { "Denominator can't be Zero" }
+        if (denominator < 0) {
+            denominator *= -1
+            numerator *= -1
+        }
     }
 
     fun add(other: Fraction): Fraction {
-        var rNumerator: Int
-        var rDenominator: Int
+        val rNumerator: Int
+        val rDenominator: Int
 
         if (this.denominator == other.denominator) {
             rNumerator = this.numerator + other.numerator
@@ -21,10 +25,7 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
             rNumerator = this.numerator * other.denominator + other.numerator * this.denominator
             rDenominator = this.denominator * other.denominator
         }
-        if (rDenominator < 0) {
-            rDenominator *= -1
-            rNumerator *= -1
-        }
+
         return Fraction(rNumerator, rDenominator).lowestTerm()
     }
 
