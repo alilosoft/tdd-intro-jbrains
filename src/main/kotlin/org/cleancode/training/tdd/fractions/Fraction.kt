@@ -8,14 +8,14 @@ data class Fraction(val numerator: Int, val denominator: Int = 1) {
     }
 
     fun add(other: Fraction): Fraction {
-        var rNumerator: Int
-        var rDenominator: Int
+        val rNumerator: Int
+        val rDenominator: Int
 
         if (this.denominator == other.denominator) {
             rNumerator = this.numerator + other.numerator
             rDenominator = this.denominator
         } else {
-            // calc common denominator
+            // unify the denominator
             rNumerator = this.numerator * other.denominator + other.numerator * this.denominator
             rDenominator = this.denominator * other.denominator
         }
