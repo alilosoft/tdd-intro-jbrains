@@ -3,7 +3,7 @@ package org.cleancode.training.tdd.fractions
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class FractionTest {
+internal class AddingFractionsTest {
 
     @Test(expected = AssertionError::class)
     fun denominatorMustNotEqualToZero() {
