@@ -2,6 +2,8 @@ package org.cleancode.training.tdd.fractions
 
 import kotlin.math.min
 
+infix fun Int.over(denominator: Int) = Fraction(this, denominator)
+
 data class Fraction(val numerator: Int, val denominator: Int = 1) {
     init {
         assert(denominator != 0) { "Denominator can't be Zero" }
