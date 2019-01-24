@@ -1,5 +1,6 @@
 package org.cleancode.training.tdd.fractions
 
+import kotlin.math.abs
 import kotlin.math.min
 
 infix fun Int.over(denominator: Int) = Fraction(this, denominator)
@@ -29,17 +30,17 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
         return Fraction(rNumerator, rDenominator).lowestTerm()
     }
 
-    private fun lowestTerm(): Fraction {
-        println(this)
-        var gcd = euclideanGCD(numerator, denominator)
-        if (gcd < 0) gcd *= -1 // avoid flipping numerator & denominator signs
-        return Fraction(numerator / gcd, denominator / gcd)
+    private fun reduce(): Fraction {
+        val gcd = gcd(numerator, denominator)
+        numerator /= gcd
+        denominator /= gcd
+        return this
     }
 
 }
 
-fun euclideanGCD(a: Int, b: Int): Int {
-    return if (b == 0) a else euclideanGCD(b, a % b)
+fun gcd(a: Int, b: Int): Int {
+    return if (b == 0) abs(a) else gcd(b, a % b)
 }
 
 fun calcGCD(n1: Int, n2: Int): Int {
