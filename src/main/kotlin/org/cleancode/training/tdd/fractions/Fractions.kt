@@ -42,15 +42,3 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
 fun gcd(a: Int, b: Int): Int {
     return if (b == 0) abs(a) else gcd(b, a % b)
 }
-
-fun calcGCD(n1: Int, n2: Int): Int {
-    var gcd = 1
-    val min = min(n1, n2)
-
-    for (g in 2..min) {
-        if (n1 % g == 0 && n2 % g == 0) {
-            gcd = g
-        }
-    }
-    return gcd
-}
