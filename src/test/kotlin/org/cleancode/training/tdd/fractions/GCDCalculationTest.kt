@@ -6,7 +6,12 @@ import kotlin.test.assertEquals
 class GCDCalculationTest {
 
     @Test
-    fun gcdNotEqualsToOne() {
+    fun gcdEqualsOne() {
+        assertEquals(1, gcd(3, 4))
+    }
+
+    @Test
+    fun gcdNotEqualsOne() {
         assertEquals(3, gcd(9, 6))
         assertEquals(3, gcd(3, 9))
         assertEquals(5, gcd(5, 15))
