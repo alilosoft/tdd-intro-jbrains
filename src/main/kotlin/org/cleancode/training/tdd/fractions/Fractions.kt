@@ -1,7 +1,6 @@
 package org.cleancode.training.tdd.fractions
 
 import kotlin.math.abs
-import kotlin.math.min
 
 infix fun Int.over(denominator: Int) = Fraction(this, denominator)
 
@@ -12,6 +11,7 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
             denominator *= -1
             numerator *= -1
         }
+        reduce()
     }
 
     fun add(other: Fraction): Fraction {
@@ -27,7 +27,7 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
             rDenominator = this.denominator * other.denominator
         }
 
-        return Fraction(rNumerator, rDenominator).lowestTerm()
+        return Fraction(rNumerator, rDenominator).reduce()
     }
 
     private fun reduce(): Fraction {
