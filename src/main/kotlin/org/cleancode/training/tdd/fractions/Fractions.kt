@@ -24,3 +24,5 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
 infix fun Int.over(denominator: Int) = Fraction(this, denominator)
 
 operator fun Fraction.plus(other: Fraction) = add(other)
+
+operator fun Fraction.times(other: Fraction) = multiply(other)

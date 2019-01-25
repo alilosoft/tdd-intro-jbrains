@@ -14,8 +14,8 @@ class MultiplyFractionsTest {
 
     @Test
     fun multiplyByOneShouldHaveNoEffect() {
-        assertEquals(Fraction(1), Fraction(1).multiply(Fraction(1)))
-        assertEquals(Fraction(2), Fraction(1).multiply(Fraction(2)))
-        assertEquals(1 over 2, Fraction(1).multiply(1 over 2))
+        assertEquals(Fraction(1), Fraction(1) * (Fraction(1)))
+        assertEquals(Fraction(2), Fraction(1) * (Fraction(2)))
+        assertEquals(1 over 2, Fraction(1) * (1 over 2))
     }
 }
