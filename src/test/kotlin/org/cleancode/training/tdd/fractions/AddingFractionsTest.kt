@@ -79,4 +79,11 @@ internal class AddingFractionsTest {
         assertEquals(6 over 5, (-7 over -10).add(1 over 2))
     }
 
+    @Test
+    fun usingOverloadedPlusOperator() {
+        assertEquals(Fraction(1), (1 over 2) + (1 over 2))
+        assertEquals(7 over 10, (-7 over -10) + Fraction(0))
+        assertEquals(-5 over 6, (7 over -10) + (2 over -15))
+    }
+
 }
