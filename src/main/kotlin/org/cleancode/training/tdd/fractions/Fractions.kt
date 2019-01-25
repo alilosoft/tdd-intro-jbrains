@@ -7,10 +7,6 @@ infix fun Int.over(denominator: Int) = Fraction(this, denominator)
 data class Fraction(var numerator: Int, var denominator: Int = 1) {
     init {
         assert(denominator != 0) { "Denominator can't be Zero" }
-        if (denominator < 0) {
-            denominator *= -1
-            numerator *= -1
-        }
         reduce()
     }
 
@@ -26,15 +22,14 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
             rNumerator = this.numerator * other.denominator + other.numerator * this.denominator
             rDenominator = this.denominator * other.denominator
         }
-
-        return Fraction(rNumerator, rDenominator).reduce()
+        return Fraction(rNumerator, rDenominator)
     }
 
-    private fun reduce(): Fraction {
+    private fun reduce() {
         val gcd = gcd(numerator, denominator)
-        numerator /= gcd
-        denominator /= gcd
-        return this
+        val denominatorSign = if (denominator < 0 ) -1 else  1
+        numerator /= gcd * denominatorSign
+        denominator /= gcd * denominatorSign
     }
 
 }

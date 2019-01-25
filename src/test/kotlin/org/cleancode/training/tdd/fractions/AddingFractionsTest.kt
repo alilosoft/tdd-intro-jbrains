@@ -62,7 +62,7 @@ internal class AddingFractionsTest {
     }
 
     @Test
-    fun whenDenominatorHaveDifferentSigns() {
+    fun whenDenominatorsHaveDifferentSigns() {
         assertEquals(-1 over 5, (3 over 5).add(4 over -5))
         assertEquals(-7 over 5, (-3 over 5).add(4 over -5))
         assertEquals(1 over 5, (3 over -5).add(4 over 5))
