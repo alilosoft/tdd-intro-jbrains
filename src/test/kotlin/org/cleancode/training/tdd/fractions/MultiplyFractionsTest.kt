@@ -18,4 +18,10 @@ class MultiplyFractionsTest {
         assertEquals(Fraction(2), Fraction(1) * (Fraction(2)))
         assertEquals(1 over 2, Fraction(1) * (1 over 2))
     }
+
+    @Test
+    fun nonZeroAndNonOneOperands() {
+        assertEquals(1 over 4, (1 over 2) * (1 over 2))
+        assertEquals(2 over 15, (1 over 3) * (2 over 5))
+    }
 }
