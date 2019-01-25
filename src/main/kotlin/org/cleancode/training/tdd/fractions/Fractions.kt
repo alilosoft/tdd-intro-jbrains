@@ -17,4 +17,8 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
         return Fraction(rNumerator, rDenominator)
     }
 
+    fun multiply(other: Fraction): Fraction {
+        return Fraction(0)
+    }
+
 }
