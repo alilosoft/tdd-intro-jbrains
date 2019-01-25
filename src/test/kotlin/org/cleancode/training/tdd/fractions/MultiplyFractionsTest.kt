@@ -24,4 +24,10 @@ class MultiplyFractionsTest {
         assertEquals(1 over 4, (1 over 2) * (1 over 2))
         assertEquals(2 over 15, (1 over 3) * (2 over 5))
     }
+
+    @Test
+    fun reduceResult() {
+        assertEquals(1 over 2, (2 over 3) * (3 over 4))
+        assertEquals(1 over 3, (2 over 3) * (1 over 2))
+    }
 }
