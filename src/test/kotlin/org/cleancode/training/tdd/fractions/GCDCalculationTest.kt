@@ -7,7 +7,9 @@ class GCDCalculationTest {
 
     @Test
     fun gcdEqualsOne() {
+        assertEquals(1, gcd(3, 2))
         assertEquals(1, gcd(3, 4))
+        assertEquals(1, gcd(4, 9))
     }
 
     @Test
