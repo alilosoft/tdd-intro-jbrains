@@ -19,6 +19,10 @@ data class Fraction(var numerator: Int, var denominator: Int = 1) {
         return  Fraction(this.numerator * other.numerator, this.denominator * other.denominator)
     }
 
+    override fun toString(): String {
+        return "$numerator/$denominator"
+    }
+
 }
 
 infix fun Int.over(denominator: Int) = Fraction(this, denominator)
