@@ -1,9 +1,10 @@
 package org.cleancode.training.tdd.fractions.junit5
 
 import org.cleancode.training.tdd.fractions.over
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
-import kotlin.test.assertEquals
 
 class FractionCreationTest {
     @Test
@@ -14,4 +15,12 @@ class FractionCreationTest {
         assertEquals("Denominator can't be Zero", error.message)
     }
 
+    @Test
+    fun `Fractions Should Always Created In Lowest Term`() {
+        assertAll("reduce fractions when created",
+                { assertEquals(1 over 2, 2 over 4) },
+                { assertEquals(1 over 2, 4 over 8) },
+                { assertEquals(1 over 2, 2 over 4) },
+                { assertEquals(1 over 2, 4 over 8) })
+    }
 }
