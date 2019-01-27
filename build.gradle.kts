@@ -44,7 +44,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = ""
+    mainClassName = "org.cleancode.training.tdd.fractions.DemoKt"
 }
 
 tasks.test {
