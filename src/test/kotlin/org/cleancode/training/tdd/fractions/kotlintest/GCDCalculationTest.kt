@@ -1,5 +1,6 @@
-package org.cleancode.training.tdd.fractions
+package org.cleancode.training.tdd.fractions.kotlintest
 
+import org.cleancode.training.tdd.fractions.gcd
 import org.junit.Test
 import kotlin.test.assertEquals
 
