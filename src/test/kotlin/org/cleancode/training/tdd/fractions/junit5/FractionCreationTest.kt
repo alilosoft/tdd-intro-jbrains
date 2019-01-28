@@ -18,9 +18,10 @@ class FractionCreationTest {
     @Test
     fun `Fractions Should Always Created In Lowest Term`() {
         assertAll("reduce fractions when created",
-                { assertEquals(1 over 2, 2 over 4) },
+                { assertEquals(1 over 2, 2 over 4) { "2/4 should be reduced to 1/2" } },
                 { assertEquals(1 over 2, 4 over 8) },
                 { assertEquals(1 over 2, 2 over 4) },
                 { assertEquals(1 over 2, 4 over 8) })
     }
+
 }
