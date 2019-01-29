@@ -45,7 +45,9 @@ dependencies {
 
     // include JUnitParams https://github.com/Pragmatists/JUnitParams
     testImplementation("pl.pragmatists:JUnitParams:1.1.1")
-    
+
+    // AssertJ https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation("org.assertj:assertj-core:3.11.1")
 }
 
 application {
