@@ -43,6 +43,9 @@ dependencies {
     // Parametrized Test
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.3.2")
 
+    // include JUnitParams https://github.com/Pragmatists/JUnitParams
+    testImplementation("pl.pragmatists:JUnitParams:1.1.1")
+    
 }
 
 application {
