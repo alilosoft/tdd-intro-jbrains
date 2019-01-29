@@ -40,6 +40,9 @@ dependencies {
     // JUnit 5 Runtime
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.2")
 
+    // Parametrized Test
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.3.2")
+
 }
 
 application {
