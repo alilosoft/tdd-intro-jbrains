@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 
-class FractionCreationTest {
+class CreateFractionTest {
     @Test
     fun whenDenominatorZeroThrowsException() {
         val error = assertThrows<AssertionError>("Denominator can't be Zero") {
