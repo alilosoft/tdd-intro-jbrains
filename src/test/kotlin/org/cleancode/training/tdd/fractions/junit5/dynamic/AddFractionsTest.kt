@@ -1,4 +1,4 @@
-package org.cleancode.training.tdd.fractions.junit5
+package org.cleancode.training.tdd.fractions.junit5.dynamic
 
 import org.cleancode.training.tdd.fractions.Fraction
 import org.cleancode.training.tdd.fractions.over
@@ -7,14 +7,14 @@ import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 
-class AddingFractionsTest {
+class AddFractionsTest {
 
-    private fun addDynamicTest(input: List<Fraction>, result: Fraction): DynamicTest =
-            dynamicTest("${input.joinToString(" + ")} = $result") {
+    private fun addFractionsDynamicTest(input: List<Fraction>, result: Fraction): DynamicTest =
+            dynamicTest("${input.joinToString(" + ")} should be: $result") {
                 assertEquals(result, input.fold(Fraction(0), Fraction::add))
             }
 
-    private val testData = listOf(
+    private val testData = mapOf(
             listOf(Fraction(0), Fraction(0)) to Fraction(0),
             listOf(Fraction(1), Fraction(2)) to Fraction(3),
             listOf(Fraction(1), Fraction(2), Fraction(3)) to Fraction(6),
@@ -22,18 +22,15 @@ class AddingFractionsTest {
             listOf(2 over 7, 3 over 7, 4 over 7) to (9 over 7)
     )
 
-    private val wholeNumberTestData = testData.filter { it.first.all { fraction -> fraction.denominator == 1 } }
+    private val wholeNumberTestData = testData.filter { input -> input.key.all { it.denominator == 1 } }
 
     @TestFactory
-    fun `Adding Whole Number Fractions`() = wholeNumberTestData.map { (input, result) -> addDynamicTest(input, result) }
+    fun `Adding Whole Number Fractions`() = wholeNumberTestData.map { (input, result) -> addFractionsDynamicTest(input, result) }
 
-    private val sameDenominatorTestData = listOf(
-            listOf(2 over 7, 3 over 7) to (5 over 7),
-            listOf(2 over 7, 3 over 7, 4 over 7) to (9 over 7)
-    )
+    private val sameDenominatorTestData = testData.filter { input -> input.key.all { it.denominator != 1 } }
 
     @TestFactory
-    fun `Adding Fractions With Same Denominators`() = sameDenominatorTestData.map { (input, result) -> addDynamicTest(input, result) }
+    fun `Adding Fractions With Same Denominators`() = sameDenominatorTestData.map { (input, result) -> addFractionsDynamicTest(input, result) }
 
     private val addingAndReducingTestData = listOf(
             listOf(4 over 7, 3 over 7) to Fraction(1),
@@ -41,9 +38,9 @@ class AddingFractionsTest {
     )
 
     @TestFactory // create test factory using method reference
-    fun `Adding & Reducing Result`() = addingAndReducingTestData.map(::addDynamicTest)
+    fun `Adding & Reducing Result`() = addingAndReducingTestData.map(::addFractionsDynamicTest)
 
-    private fun addDynamicTest(cases: Pair<List<Fraction>, Fraction>): DynamicTest {
+    private fun addFractionsDynamicTest(cases: Pair<List<Fraction>, Fraction>): DynamicTest {
         val (input, result) = cases
         return dynamicTest("${input.joinToString(" + ")} = $result") {
             assertEquals(result, input.fold(Fraction(0), Fraction::add))
