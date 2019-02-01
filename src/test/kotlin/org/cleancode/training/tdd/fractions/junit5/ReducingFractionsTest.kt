@@ -32,6 +32,13 @@ class ReducingFractionsTest {
             arguments(2, 4, 1 over 2),
             arguments(9, 15, 3 over 5))
 
+    @DisplayName("Reducing (Companion Object Method Source)")
+    @ParameterizedTest(name = "{0}/{1} should be reduced to {2}")
+    @MethodSource("testDataCompanion")
+    fun `Reducing Fractions (Companion Object)`(numerator: Int, denominator: Int, reduced: Fraction) {
+        assertThat(Fraction(numerator, denominator)).isEqualTo(reduced)
+    }
+
     // Using companion object to define static method source
     companion object {
         @JvmStatic
@@ -40,27 +47,20 @@ class ReducingFractionsTest {
                 Arguments.of(5, 15, 1 over 3))
     }
 
-    @DisplayName("Reducing (Companion Object Method Source)")
-    @ParameterizedTest(name = "{0}/{1} should be reduced to {2}")
-    @MethodSource("testDataCompanion")
-    fun `Reducing Fractions (Companion Object)`(numerator: Int, denominator: Int, reduced: Fraction) {
-        assertThat(Fraction(numerator, denominator)).isEqualTo(reduced)
-    }
-
     // Using external class method as MethodSource
     // pros: Keep the test class clean
     // cons: somehow confusing & anti-refactoring
     @DisplayName("Reducing (External Method Source)")
     @ParameterizedTest(name = "{0}/{1} should be reduced to {2}")
-    @MethodSource("data.TestData#reducableFractions")
+    @MethodSource("org.cleancode.training.tdd.fractions.junit5.TestData#reduceableFractions")
     fun `Reducing Fractions (External Method Source)`(numerator: Int, denominator: Int, reduced: Fraction) {
         assertThat(Fraction(numerator, denominator)).isEqualTo(reduced)
     }
 
-    // Using custom annotation @FractionsMethodSource to define method source
+    // Using custom annotation @ReduceableFractionsMethodSource to define method source
     @DisplayName("Reducing (Meta-Annotation Method Source)")
     @ParameterizedTest(name = "{0}/{1} should be reduced to {2}")
-    @FractionsMethodSource // meta-annotation
+    @ReduceableFractionsMethodSource // meta-annotation
     fun `Reducing Fractions (Meta-Annotation)`(numerator: Int, denominator: Int, reduced: Fraction) {
         assertThat(Fraction(numerator, denominator)).isEqualTo(reduced)
     }
