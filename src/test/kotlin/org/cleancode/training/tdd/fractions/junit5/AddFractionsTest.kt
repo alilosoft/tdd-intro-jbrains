@@ -1,4 +1,4 @@
-package org.cleancode.training.tdd.fractions.junit5.dynamic
+package org.cleancode.training.tdd.fractions.junit5
 
 import org.cleancode.training.tdd.fractions.Fraction
 import org.cleancode.training.tdd.fractions.over

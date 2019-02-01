@@ -1,4 +1,4 @@
-@file:JvmName("MethodSources")
+@file:JvmName("TestData")
 
 package data
 

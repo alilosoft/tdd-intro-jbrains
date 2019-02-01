@@ -48,9 +48,11 @@ class ReducingFractionsTest {
     }
 
     // Using external class method as MethodSource
+    // pros: Keep the test class clean
+    // cons: somehow confusing & anti-refactoring
     @DisplayName("Reducing (External Method Source)")
     @ParameterizedTest(name = "{0}/{1} should be reduced to {2}")
-    @MethodSource("data.MethodSources#reducableFractions")
+    @MethodSource("data.TestData#reducableFractions")
     fun `Reducing Fractions (External Method Source)`(numerator: Int, denominator: Int, reduced: Fraction) {
         assertThat(Fraction(numerator, denominator)).isEqualTo(reduced)
     }
