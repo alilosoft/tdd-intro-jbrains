@@ -9,14 +9,17 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
-import java.util.stream.Stream
 
-
+/**
+ * Show case of using JUnit 5 parametrized tests with
+ * custom arguments providers and meta-annotations
+ */
 class MultiplyFractionsTest {
 
+
     @ParameterizedTest(name = "[{index}] {0} * {1} should be {2}")
-    @MultiplyByZeroArgs //or: @ArgumentsSource(MultiplyByZeroTestData::class)
-    fun multiplyByZeroShouldAlwaysReturnZero(f1: Fraction, f2: Fraction, result: Fraction) {
+    @ArgumentsSource(MultiplyByZeroTestData::class)
+    fun multiplyFractionsByZero(f1: Fraction, f2: Fraction, result: Fraction) {
         assertThat(f1 * f2).isEqualTo(result)
     }
 
@@ -27,20 +30,20 @@ class MultiplyFractionsTest {
     }
 
     @ParameterizedTest(name = "[{index}] {0} * {1} should be {2}")
-    @ArgumentsSource(MultiplyPositiveTestData::class)
+    @ArgumentsSource(PositiveFractionsTestData::class)
     fun multiplyPositiveFractions(f1: Fraction, f2: Fraction, result: Fraction) {
         assertThat(f1 * f2).isEqualTo(result)
     }
 
     @ParameterizedTest(name = "[{index}] {0} * {1} should be {2}")
-    @ArgumentsSource(MultiplyNegativeTestData::class)
+    @NegativeFractionsArgs
     fun multiplyNegativeFractions(f1: Fraction, f2: Fraction, result: Fraction) {
         assertThat(f1 * f2).isEqualTo(result)
     }
 
 }
 
-val multiplications = listOf(
+val allTestsData = arrayOf(
         arrayOf(Fraction(0), Fraction(0), Fraction(0)),
         arrayOf(Fraction(0), 1 over 2, Fraction(0)),
         arrayOf(Fraction(1), Fraction(1), Fraction(1)),
@@ -51,43 +54,37 @@ val multiplications = listOf(
         arrayOf(-1 over 2, -1 over 2, 1 over 4)
 )
 
-fun argsStream(predicate: (Array<Fraction>) -> Boolean) = multiplications.filter(predicate).map { Arguments.of(*it) }.stream()
+/**
+ * Filter the test data array using the given @predicate
+ * and convert the result to Stream of Arguments
+ * @return Stream of Arguments
+ */
+fun testDataToArgsStream(predicate: (Fraction) -> Boolean) =
+        allTestsData.filter { it.any(predicate) }.map { Arguments.of(*it) }.stream()
 
 object MultiplyByZeroTestData : ArgumentsProvider {
-    override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
-        return argsStream { it.any { f -> f.numerator == 0 } }
-//        multiplications
-//                .filter { it.any { f -> f.numerator == 0 } }
-//                .map { Arguments.of(*it) }.stream()
-    }
+    override fun provideArguments(context: ExtensionContext?) =
+            testDataToArgsStream { f -> f.numerator == 0 }
 }
-
-@Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.FUNCTION)
-@ArgumentsSource(MultiplyByZeroTestData::class)
-annotation class MultiplyByZeroArgs
 
 object MultiplyByOneTestData : ArgumentsProvider {
-    override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
-        return multiplications
-                .filter { it.any { f -> f.denominator == 1 && f.numerator == 1 } }
-                .map { Arguments.of(*it) }.stream()
-    }
+    override fun provideArguments(context: ExtensionContext?) =
+            testDataToArgsStream { it == Fraction(1) }
 }
 
-object MultiplyPositiveTestData : ArgumentsProvider {
-    override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
-        return multiplications
-                .filter { it.any { f -> f.denominator != 1 && f.numerator != 0 } }
-                .map { Arguments.of(*it) }.stream()
-    }
+object PositiveFractionsTestData : ArgumentsProvider {
+    override fun provideArguments(context: ExtensionContext?) =
+            testDataToArgsStream { it.denominator != 1 && it.numerator != 0 }
 }
 
-object MultiplyNegativeTestData : ArgumentsProvider {
-    override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
-        return multiplications
-                .filter { it.any { f -> f.numerator < 0 } }
-                .map { Arguments.of(*it) }.stream()
-    }
+object NegativeFractionsTestData : ArgumentsProvider {
+    override fun provideArguments(context: ExtensionContext?) =
+            testDataToArgsStream { it.numerator < 0 }
 }
+
+// custom annotation
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.FUNCTION)
+@ArgumentsSource(NegativeFractionsTestData::class)
+annotation class NegativeFractionsArgs
 
