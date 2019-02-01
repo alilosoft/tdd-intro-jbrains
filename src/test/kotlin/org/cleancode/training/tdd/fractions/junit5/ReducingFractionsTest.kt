@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 // or using custom annotation: @NonStaticMethodSource
 // or using junit-platform.properties
-@DisplayName("Fractions Should Always Reduced To Lowest Term")
+@DisplayName("Reduce fractions to lowest term")
 class ReducingFractionsTest {
 
     // non-static MethodSource can be used for parametrized test

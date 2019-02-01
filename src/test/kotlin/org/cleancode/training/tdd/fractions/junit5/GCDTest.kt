@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
 import org.junit.jupiter.params.provider.CsvSource
 
-@DisplayName("GCD Calculations")
+@DisplayName("Calc GCD of tow numbers")
 class GCDTest {
 
     @DisplayName("GCD should equal to one")

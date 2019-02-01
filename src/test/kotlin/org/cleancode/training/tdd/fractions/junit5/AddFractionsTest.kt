@@ -3,10 +3,12 @@ package org.cleancode.training.tdd.fractions.junit5
 import org.cleancode.training.tdd.fractions.Fraction
 import org.cleancode.training.tdd.fractions.over
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 
+@DisplayName("Add fractions")
 class AddFractionsTest {
 
     private fun addFractionsDynamicTest(input: List<Fraction>, result: Fraction): DynamicTest =

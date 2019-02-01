@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.cleancode.training.tdd.fractions.Fraction
 import org.cleancode.training.tdd.fractions.over
 import org.cleancode.training.tdd.fractions.times
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -14,8 +15,8 @@ import org.junit.jupiter.params.provider.ArgumentsSource
  * Show case of using JUnit 5 parametrized tests with
  * custom arguments providers and meta-annotations
  */
+@DisplayName("Multiply fractions")
 class MultiplyFractionsTest {
-
 
     @ParameterizedTest(name = "[{index}] {0} * {1} should be {2}")
     @ArgumentsSource(MultiplyByZeroTestData::class)
