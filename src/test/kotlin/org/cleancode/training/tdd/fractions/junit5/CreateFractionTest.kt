@@ -20,9 +20,10 @@ import org.junit.jupiter.params.converter.ConvertWith
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
+@DisplayName("Create fractions")
 class CreateFractionTest {
 
-    @DisplayName("Throw an Exception if the denominator is Zero")
+    @DisplayName("Throw an Exception if Denominator is Zero")
     @Test
     fun whenDenominatorZeroThrowsException() {
         val error = assertThrows<AssertionError> {
@@ -33,7 +34,14 @@ class CreateFractionTest {
 
     // using args converter
     @ParameterizedTest(name = "{0}")
-    @ValueSource(strings = ["0", "1", "1/2", "1/4", "1/1", "-1/2", "1/-4"])
+    @ValueSource(strings = ["1/2"])
+    fun `Implicit String Conversion to Fraction`(f: Fraction) {
+        assertThat(f).isEqualTo(1 over 2)
+    }
+
+    // using args converter
+    @ParameterizedTest(name = "{0}")
+    @ValueSource(strings = ["1/2", "1/4", "1/1", "-1/2", "1/-4"])
     fun `Fraction From String (ArgsConverter)`(@ConvertToFraction f: Fraction) {
         assertThat(f).isNotNull
     }
@@ -57,31 +65,14 @@ class CreateFractionTest {
 
 object FractionConverter : ArgumentConverter {
     override fun convert(source: Any?, context: ParameterContext?): Fraction {
-        var numerator = 0
-        var denominator = 1
-        if (source is String) {
-            var numStr = "0"
-            var denumStr = "1"
-            if (source.contains('/')) {
-                val fractionParts = source.split("/")
-                assert(fractionParts.size == 2) {
-                    ArgumentConversionException("Cant convert $source to Fraction")
-                }
-                numStr = fractionParts[0]
-                denumStr = fractionParts[1]
-            } else {
-                numStr = source
-            }
+        val errorMess = "Can't convert $source to Fraction!"
+        if (source is String && source.isNotEmpty()) {
             try {
-                numerator = numStr.toInt()
-                denominator = denumStr.toInt()
-            } catch (e1: Exception) {
-                throw ArgumentConversionException("Cant convert $source to Fraction")
+                return Fraction.parse(source)
+            } catch (e: NumberFormatException) {
+                throw ArgumentConversionException(errorMess)
             }
-            return Fraction(numerator, denominator)
-        } else {
-            throw ArgumentConversionException("Cant convert $source to Fraction")
-        }
+        } else throw ArgumentConversionException(errorMess)
     }
 }
 
