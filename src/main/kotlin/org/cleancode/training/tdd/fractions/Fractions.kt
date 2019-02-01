@@ -1,8 +1,11 @@
 package org.cleancode.training.tdd.fractions
 
+const val DENOMINATOR_ZERO_ERROR = "Denominator can't be Zero"
+
 data class Fraction(var numerator: Int, var denominator: Int = 1) {
+
     init {
-        assert(denominator != 0) { "Denominator can't be Zero" }
+        assert(denominator != 0) { DENOMINATOR_ZERO_ERROR }
         val gcd = gcdOf(numerator, denominator)
         val denominatorSign = if (denominator < 0 ) -1 else  1
         numerator /= gcd * denominatorSign
